@@ -110,6 +110,7 @@ update_archive (void)
 
   name_gather ();
   open_archive (ACCESS_UPDATE);
+  sandbox_drop_write ();
   xheader_forbid_global ();
 
   while (!found_end)

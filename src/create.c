@@ -1351,6 +1351,7 @@ create_archive (void)
   trivial_link_count = filename_args != FILES_MANY && ! dereference_option;
 
   open_archive (ACCESS_WRITE);
+  sandbox_drop_write ();
   buffer_write_global_xheader ();
 
   if (incremental_option)

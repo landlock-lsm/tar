@@ -41,7 +41,7 @@ AC_CHECK_HEADERS_ONCE(fcntl.h linux/fd.h memory.h net/errno.h \
   sys/param.h sys/device.h sys/gentape.h \
   sys/inet.h sys/io/trioctl.h \
   sys/mtio.h sys/time.h sys/tprintf.h sys/tape.h \
-  unistd.h locale.h)
+  unistd.h locale.h linux/landlock.h)
 
 AC_CHECK_HEADERS([sys/buf.h], [], [],
 [#if HAVE_SYS_PARAM_H

@@ -648,6 +648,7 @@ void namebuf_free (namebuf_t buf);
 char *namebuf_name (namebuf_t buf, const char *name);
 
 const char *tar_dirname (void);
+int tar_dirfd (void);
 
 /* Represent N using a signed integer I such that (uintmax_t) I == N.
    With a good optimizing compiler, this is equivalent to (intmax_t) i
@@ -908,6 +909,16 @@ int sys_exec_info_script (const char **archive_name, int volume_number);
 void sys_exec_checkpoint_script (const char *script_name,
 				 const char *archive_name,
 				 int checkpoint_number);
+
+#if HAVE_LINUX_LANDLOCK_H
+void sandbox_drop_write (void);
+void sandbox_drop_all (void);
+void sandbox_write_fd (int dir_fd);
+#else
+static inline void sandbox_drop_write (void) {}
+static inline void sandbox_drop_all (void) {}
+static inline void sandbox_write_fd (int dir_fd) {}
+#endif
 
 /* Module compare.c */
 void report_difference (struct tar_stat_info *st, const char *message, ...)

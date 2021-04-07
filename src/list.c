@@ -174,6 +174,14 @@ read_and (void (*do_something) (void))
   name_gather ();
 
   open_archive (ACCESS_READ);
+  if (do_something == extract_archive) {
+    sandbox_write_fd(tar_dirfd());
+  } else if (do_something == diff_archive) {
+    sandbox_drop_write();
+  } else {
+    sandbox_drop_all();
+  }
+
   do
     {
       prev_status = status;
@@ -1450,6 +1458,8 @@ test_archive_label (void)
   name_gather ();
 
   open_archive (ACCESS_READ);
+  sandbox_drop_all ();
+
   if (read_header (&current_header, &current_stat_info, read_header_auto)
       == HEADER_SUCCESS)
     {

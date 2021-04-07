@@ -177,6 +177,7 @@ delete_archive_members (void)
 
   name_gather ();
   open_archive (ACCESS_UPDATE);
+  sandbox_drop_all ();
   acting_as_filter = strcmp (archive_name_array[0], "-") == 0;
 
   /* Skip to the first member that matches the name list. */

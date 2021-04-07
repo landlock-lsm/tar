@@ -1034,6 +1034,15 @@ tar_dirname (void)
   return wd[chdir_current].name;
 }
 
+int
+tar_dirfd (void)
+{
+  chdir_do (chdir_count ());
+  if (!wd || wd_count == 0 || wd[chdir_count ()].fd == AT_FDCWD)
+    return -1;
+  return wd[chdir_count ()].fd;
+}
+
 /* Return the absolute path that represents the working
    directory referenced by IDX.
 
